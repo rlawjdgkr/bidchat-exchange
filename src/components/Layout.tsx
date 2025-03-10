@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import { Trophy, List } from "lucide-react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -10,9 +11,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <Link to="/" className="text-2xl font-bold">
             BidChat
           </Link>
-          <div className="space-x-4">
-            <Link to="/auctions" className="hover:text-accent">
-              경매
+          <div className="space-x-6">
+            <Link to="/auctions" className="hover:text-accent inline-flex items-center gap-2">
+              <List className="w-4 h-4" />
+              경매 리스트
+            </Link>
+            <Link to="/won-auctions" className="hover:text-accent inline-flex items-center gap-2">
+              <Trophy className="w-4 h-4" />
+              낙찰된 경매
             </Link>
             <Link to="/login" className="hover:text-accent">
               로그인
