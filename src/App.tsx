@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Auctions from "./pages/Auctions";
 import WonAuctions from "./pages/WonAuctions";
+import AuctionDetail from "./pages/AuctionDetail";
+import ReservedAuctions from "./pages/ReservedAuctions";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +23,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/auctions" element={<Auctions />} />
           <Route path="/won-auctions" element={<WonAuctions />} />
+          <Route path="/auction/:id" element={<AuctionDetail />} />
+          <Route path="/reserved-auctions" element={<ReservedAuctions />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
