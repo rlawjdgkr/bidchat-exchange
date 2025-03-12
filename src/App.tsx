@@ -11,6 +11,7 @@ import AuctionDetail from "./pages/AuctionDetail";
 import ReservedAuctions from "./pages/ReservedAuctions";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import RegisterProduct from "./pages/RegisterProduct";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/auctions" element={<Auctions />} />
+          <Route path="/register-product" element={<RegisterProduct />} />
           <Route path="/won-auctions" element={<WonAuctions />} />
           <Route path="/auction/:id" element={<AuctionDetail />} />
           <Route path="/reserved-auctions" element={<ReservedAuctions />} />

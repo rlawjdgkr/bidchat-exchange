@@ -4,27 +4,41 @@ import { Button } from "@/components/ui/button";
 import { useNavigate, useParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
+interface Product {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  initialPrice: number;
+  bidUnit: number;
+  buyNowPrice: number;
+  image: string;
+  createdAt: string;
+}
+
 const AuctionDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
 
+  const products: Product[] = JSON.parse(localStorage.getItem("products") || "[]");
+  const product = products.find(p => p.id === id);
+
+  if (!product) {
+    return (
+      <Layout>
+        <div className="text-center py-8">
+          <h1 className="text-2xl font-bold">상품을 찾을 수 없습니다</h1>
+        </div>
+      </Layout>
+    );
+  }
+
   const handleBid = () => {
-    // Get existing reserved auctions or initialize empty array
     const existingReserved = JSON.parse(localStorage.getItem("reservedAuctions") || "[]");
     
-    // Add current auction to reserved list
-    const currentAuction = {
-      id,
-      title: "빈티지 시계 컬렉션",
-      currentPrice: "1,200,000",
-      image: "https://placehold.co/400x300",
-      endTime: "2024-03-20 15:00",
-    };
-    
-    // Only add if not already in list
     if (!existingReserved.find((auction: any) => auction.id === id)) {
-      existingReserved.push(currentAuction);
+      existingReserved.push(product);
       localStorage.setItem("reservedAuctions", JSON.stringify(existingReserved));
     }
 
@@ -33,7 +47,6 @@ const AuctionDetail = () => {
       description: "성공적으로 입찰되었습니다.",
     });
 
-    // Navigate to reserved auctions page
     navigate("/reserved-auctions");
   };
 
@@ -42,22 +55,30 @@ const AuctionDetail = () => {
       <div className="max-w-4xl mx-auto p-4">
         <div className="mb-8">
           <img
-            src="https://placehold.co/400x300"
-            alt="Auction Item"
+            src={product.image}
+            alt={product.title}
             className="w-full h-96 object-cover rounded-lg"
           />
         </div>
         <div className="space-y-6">
-          <h1 className="text-3xl font-bold">빈티지 시계 컬렉션</h1>
+          <h1 className="text-3xl font-bold">{product.title}</h1>
+          <p className="text-gray-600">{product.description}</p>
           <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold text-accent">₩1,200,000</div>
+            <div>
+              <p className="text-sm text-gray-500">현재 입찰가</p>
+              <div className="text-2xl font-bold text-accent">₩{product.initialPrice.toLocaleString()}</div>
+              <p className="text-sm text-gray-500 mt-2">즉시 구매가: ₩{product.buyNowPrice.toLocaleString()}</p>
+            </div>
             <Button onClick={handleBid} className="px-8">
               입찰하기
             </Button>
           </div>
-          <p className="text-gray-600">
-            종료 시간: 2024-03-20 15:00
-          </p>
+          <div className="text-sm text-gray-500">
+            카테고리: {product.category}
+          </div>
+          <div className="text-sm text-gray-500">
+            경매 단위: ₩{product.bidUnit.toLocaleString()}
+          </div>
         </div>
       </div>
     </Layout>
