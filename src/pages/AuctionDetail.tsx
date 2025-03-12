@@ -29,6 +29,9 @@ const AuctionDetail = () => {
       <Layout>
         <div className="text-center py-8">
           <h1 className="text-2xl font-bold">상품을 찾을 수 없습니다</h1>
+          <Button onClick={() => navigate("/auctions")} className="mt-4">
+            경매 리스트로 돌아가기
+          </Button>
         </div>
       </Layout>
     );
@@ -37,7 +40,7 @@ const AuctionDetail = () => {
   const handleBid = () => {
     const existingReserved = JSON.parse(localStorage.getItem("reservedAuctions") || "[]");
     
-    if (!existingReserved.find((auction: any) => auction.id === id)) {
+    if (!existingReserved.find((auction: Product) => auction.id === id)) {
       existingReserved.push(product);
       localStorage.setItem("reservedAuctions", JSON.stringify(existingReserved));
     }
