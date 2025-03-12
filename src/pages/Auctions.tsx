@@ -49,7 +49,7 @@ const Auctions = () => {
                     variant="outline"
                     onClick={() => navigate(`/auction/${product.id}`)}
                   >
-                    입찰하기
+                    경매예약
                   </Button>
                 </div>
               </div>

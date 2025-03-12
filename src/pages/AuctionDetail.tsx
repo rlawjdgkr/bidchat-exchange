@@ -1,4 +1,3 @@
-
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { useNavigate, useParams } from "react-router-dom";
@@ -73,7 +72,7 @@ const AuctionDetail = () => {
               <p className="text-sm text-gray-500 mt-2">즉시 구매가: ₩{product.buyNowPrice.toLocaleString()}</p>
             </div>
             <Button onClick={handleBid} className="px-8">
-              입찰하기
+              경매예약
             </Button>
           </div>
           <div className="text-sm text-gray-500">
