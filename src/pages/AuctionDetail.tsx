@@ -1,3 +1,4 @@
+
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { useNavigate, useParams } from "react-router-dom";
@@ -13,6 +14,7 @@ interface Product {
   buyNowPrice: number;
   image: string;
   createdAt: string;
+  sellerId: string;
 }
 
 const AuctionDetail = () => {
@@ -22,6 +24,7 @@ const AuctionDetail = () => {
 
   const products: Product[] = JSON.parse(localStorage.getItem("products") || "[]");
   const product = products.find(p => p.id === id);
+  const currentUser = localStorage.getItem("currentUser"); // Get current user
 
   if (!product) {
     return (
@@ -45,11 +48,15 @@ const AuctionDetail = () => {
     }
 
     toast({
-      title: "입찰 완료",
-      description: "성공적으로 입찰되었습니다.",
+      title: "예약 완료",
+      description: "성공적으로 예약되었습니다.",
     });
 
     navigate("/reserved-auctions");
+  };
+
+  const handleStartAuction = () => {
+    navigate(`/live-auction/${id}`);
   };
 
   return (
@@ -71,9 +78,15 @@ const AuctionDetail = () => {
               <div className="text-2xl font-bold text-accent">₩{product.initialPrice.toLocaleString()}</div>
               <p className="text-sm text-gray-500 mt-2">즉시 구매가: ₩{product.buyNowPrice.toLocaleString()}</p>
             </div>
-            <Button onClick={handleBid} className="px-8">
-              경매예약
-            </Button>
+            {product.sellerId === currentUser ? (
+              <Button onClick={handleStartAuction} className="px-8">
+                경매 시작
+              </Button>
+            ) : (
+              <Button onClick={handleBid} className="px-8">
+                경매예약
+              </Button>
+            )}
           </div>
           <div className="text-sm text-gray-500">
             카테고리: {product.category}

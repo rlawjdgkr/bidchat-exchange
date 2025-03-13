@@ -36,7 +36,18 @@ const RegisterProduct = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const newProduct: ProductData = {
+    const currentUser = localStorage.getItem("currentUser");
+    if (!currentUser) {
+      toast({
+        title: "로그인이 필요합니다",
+        description: "상품을 등록하려면 먼저 로그인해주세요.",
+        variant: "destructive",
+      });
+      navigate("/login");
+      return;
+    }
+
+    const newProduct: Product = {
       id: Date.now().toString(),
       title: formData.title,
       description: formData.description,
@@ -46,9 +57,9 @@ const RegisterProduct = () => {
       buyNowPrice: Number(formData.buyNowPrice),
       image: formData.image,
       createdAt: new Date().toISOString(),
+      sellerId: currentUser,
     };
 
-    // Get existing products or initialize empty array
     const existingProducts = JSON.parse(localStorage.getItem("products") || "[]");
     localStorage.setItem("products", JSON.stringify([...existingProducts, newProduct]));
 

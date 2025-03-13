@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,6 +12,7 @@ import ReservedAuctions from "./pages/ReservedAuctions";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import RegisterProduct from "./pages/RegisterProduct";
+import LiveAuction from "./pages/LiveAuction";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +31,7 @@ const App = () => (
           <Route path="/won-auctions" element={<WonAuctions />} />
           <Route path="/auction/:id" element={<AuctionDetail />} />
           <Route path="/reserved-auctions" element={<ReservedAuctions />} />
+          <Route path="/live-auction/:id" element={<LiveAuction />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
