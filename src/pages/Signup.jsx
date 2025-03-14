@@ -8,13 +8,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Layout from '@/components/Layout';
 import { useToast } from "@/hooks/use-toast";
 
-interface User {
-  userId: string;
-  nickname: string;
-  password: string;
-  email: string;
-}
-
 const Signup = () => {
   const [userId, setUserId] = useState('');
   const [nickname, setNickname] = useState('');
@@ -23,21 +16,19 @@ const Signup = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     
-    const newUser: User = {
+    const newUser = {
       userId,
       nickname,
       password,
       email
     };
 
-    // 기존 사용자 목록 가져오기
     const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
     
-    // 아이디 중복 체크
-    if (existingUsers.some((user: User) => user.userId === userId)) {
+    if (existingUsers.some((user) => user.userId === userId)) {
       toast({
         title: "회원가입 실패",
         description: "이미 존재하는 아이디입니다.",
@@ -46,7 +37,6 @@ const Signup = () => {
       return;
     }
 
-    // 새 사용자 추가
     localStorage.setItem('users', JSON.stringify([...existingUsers, newUser]));
     
     toast({

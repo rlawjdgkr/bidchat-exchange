@@ -8,24 +8,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Layout from '@/components/Layout';
 import { useToast } from "@/hooks/use-toast";
 
-interface User {
-  userId: string;
-  nickname: string;
-  password: string;
-  email: string;
-}
-
 const Login = () => {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     
     const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find((u: User) => u.userId === userId && u.password === password);
+    const user = users.find((u) => u.userId === userId && u.password === password);
 
     if (user) {
       localStorage.setItem('currentUser', user.userId);
