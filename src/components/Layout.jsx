@@ -1,9 +1,8 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { Trophy, List, BookmarkCheck, Plus } from "lucide-react";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }) => {
   return (
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-primary text-white px-4 py-3">
