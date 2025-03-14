@@ -5,21 +5,9 @@ import { Card } from "@/components/ui/card";
 import { Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-interface Product {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  initialPrice: number;
-  bidUnit: number;
-  buyNowPrice: number;
-  image: string;
-  createdAt: string;
-}
-
 const Auctions = () => {
   const navigate = useNavigate();
-  const products: Product[] = JSON.parse(localStorage.getItem("products") || "[]");
+  const products = JSON.parse(localStorage.getItem("products") || "[]");
 
   return (
     <Layout>

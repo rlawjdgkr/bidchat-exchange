@@ -4,7 +4,6 @@ import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 
 const ReservedAuctions = () => {
-  // Get reserved auctions from localStorage
   const reservedAuctions = JSON.parse(localStorage.getItem("reservedAuctions") || "[]");
 
   return (
@@ -15,7 +14,7 @@ const ReservedAuctions = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {reservedAuctions.map((auction: any) => (
+        {reservedAuctions.map((auction) => (
           <Card key={auction.id} className="overflow-hidden hover:shadow-lg transition-shadow">
             <img
               src={auction.image}

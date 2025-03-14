@@ -5,49 +5,29 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useParams } from "react-router-dom";
 
-interface Message {
-  id: string;
-  user: string;
-  content: string;
-  timestamp: string;
-}
-
-interface Product {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  initialPrice: number;
-  bidUnit: number;
-  buyNowPrice: number;
-  image: string;
-  createdAt: string;
-  sellerId: string;
-}
-
 const LiveAuction = () => {
   const { id } = useParams();
   const [currentBid, setCurrentBid] = useState(0);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [product, setProduct] = useState<Product | null>(null);
+  const [product, setProduct] = useState(null);
   
   useEffect(() => {
     const products = JSON.parse(localStorage.getItem("products") || "[]");
-    const foundProduct = products.find((p: Product) => p.id === id);
+    const foundProduct = products.find((p) => p.id === id);
     if (foundProduct) {
       setProduct(foundProduct);
       setCurrentBid(foundProduct.initialPrice);
     }
   }, [id]);
 
-  const handleSendMessage = (e: React.FormEvent) => {
+  const handleSendMessage = (e) => {
     e.preventDefault();
     if (!newMessage.trim()) return;
 
-    const message: Message = {
+    const message = {
       id: Date.now().toString(),
-      user: "User", // This would be replaced with actual user data
+      user: "User",
       content: newMessage,
       timestamp: new Date().toLocaleTimeString(),
     };
@@ -66,7 +46,6 @@ const LiveAuction = () => {
   return (
     <Layout>
       <div className="container mx-auto p-4 grid grid-cols-1 lg:grid-cols-3 gap-4">
-        {/* Stream Section */}
         <div className="lg:col-span-2 bg-black rounded-lg overflow-hidden">
           <div className="aspect-video bg-gray-800 relative">
             <div className="absolute top-4 left-4 bg-red-600 px-2 py-1 rounded text-white text-sm">
@@ -84,7 +63,6 @@ const LiveAuction = () => {
           </div>
         </div>
 
-        {/* Chat and Bid Section */}
         <div className="space-y-4">
           <div className="bg-white p-4 rounded-lg shadow">
             <div className="text-lg font-bold mb-2">현재 입찰가</div>
@@ -96,7 +74,6 @@ const LiveAuction = () => {
             </Button>
           </div>
 
-          {/* Chat Section */}
           <div className="bg-white rounded-lg shadow h-[400px] flex flex-col">
             <div className="p-4 border-b">
               <h2 className="font-bold">실시간 채팅</h2>

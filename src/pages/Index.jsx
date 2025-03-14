@@ -22,7 +22,6 @@ const Index = () => {
       image: "https://placehold.co/400x300",
       endTime: "2024-03-21 18:00",
     },
-    // 더미 데이터
   ];
 
   return (

@@ -8,18 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { ImagePlus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-interface ProductData {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  initialPrice: number;
-  bidUnit: number;
-  buyNowPrice: number;
-  image: string;
-  createdAt: string;
-}
-
 const RegisterProduct = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -33,7 +21,7 @@ const RegisterProduct = () => {
     image: "https://placehold.co/400x300",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     
     const currentUser = localStorage.getItem("currentUser");
@@ -47,7 +35,7 @@ const RegisterProduct = () => {
       return;
     }
 
-    const newProduct: Product = {
+    const newProduct = {
       id: Date.now().toString(),
       title: formData.title,
       description: formData.description,

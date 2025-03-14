@@ -4,27 +4,14 @@ import { Button } from "@/components/ui/button";
 import { useNavigate, useParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
-interface Product {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  initialPrice: number;
-  bidUnit: number;
-  buyNowPrice: number;
-  image: string;
-  createdAt: string;
-  sellerId: string;
-}
-
 const AuctionDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const products: Product[] = JSON.parse(localStorage.getItem("products") || "[]");
+  const products = JSON.parse(localStorage.getItem("products") || "[]");
   const product = products.find(p => p.id === id);
-  const currentUser = localStorage.getItem("currentUser"); // Get current user
+  const currentUser = localStorage.getItem("currentUser");
 
   if (!product) {
     return (
@@ -42,7 +29,7 @@ const AuctionDetail = () => {
   const handleBid = () => {
     const existingReserved = JSON.parse(localStorage.getItem("reservedAuctions") || "[]");
     
-    if (!existingReserved.find((auction: Product) => auction.id === id)) {
+    if (!existingReserved.find((auction) => auction.id === id)) {
       existingReserved.push(product);
       localStorage.setItem("reservedAuctions", JSON.stringify(existingReserved));
     }
