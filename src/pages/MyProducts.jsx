@@ -28,9 +28,14 @@ const MyProducts = () => {
     
     // Get all products and filter for current user's products
     const allProducts = JSON.parse(localStorage.getItem("products") || "[]");
+    console.log("All products:", allProducts);
+    console.log("Current user:", currentUser);
+    
+    // Filter products where sellerId matches currentUser
     const userProducts = allProducts.filter(
-      (product) => product.seller === currentUser
+      (product) => product.sellerId === currentUser
     );
+    console.log("Filtered products:", userProducts);
     setMyProducts(userProducts);
   }, [navigate, toast]);
 

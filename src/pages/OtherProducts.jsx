@@ -29,7 +29,7 @@ const OtherProducts = () => {
     // Get all products and filter out current user's products
     const allProducts = JSON.parse(localStorage.getItem("products") || "[]");
     const productsFromOthers = allProducts.filter(
-      (product) => product.seller !== currentUser
+      (product) => product.sellerId !== currentUser
     );
     setOtherProducts(productsFromOthers);
   }, [navigate, toast]);
