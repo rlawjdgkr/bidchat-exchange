@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Trophy, List, BookmarkCheck, Plus, LogOut, Package, ShoppingBag } from "lucide-react";
+import { Trophy, List, BookmarkCheck, Plus, LogOut, Package, ShoppingBag, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Layout = ({ children }) => {
@@ -46,6 +46,10 @@ const Layout = ({ children }) => {
 
             {isLoggedIn ? (
               <>
+                <Link to="/my-page" className="hover:text-accent inline-flex items-center gap-2">
+                  <User className="w-4 h-4" />
+                  마이페이지
+                </Link>
                 <Link to="/my-products" className="hover:text-accent inline-flex items-center gap-2">
                   <Package className="w-4 h-4" />
                   내 상품
